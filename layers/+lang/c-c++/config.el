@@ -20,3 +20,6 @@
 
 (defvar c-c++-default-mode-for-headers 'c-mode
   "Default mode to open header files. Can be `c-mode' or `c++-mode'.")
+
+(defvar c-c++-enable-rtags-support nil
+  "If non nil Rtags-related packages and configuration are enabled.")
