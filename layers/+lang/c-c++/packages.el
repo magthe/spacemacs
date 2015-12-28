@@ -95,7 +95,9 @@
     (spacemacs|add-company-backends :backends company-clang
       :modes c-mode-common)
     (setq company-clang-prefix-guesser 'spacemacs/company-more-than-prefix-guesser)
-    (spacemacs/add-to-hooks 'spacemacs/c-c++-load-clang-args c-c++-mode-hooks)))
+    (spacemacs/add-to-hooks 'spacemacs/c-c++-load-clang-args c-c++-mode-hooks))
+  (when c-c++-enable-irony-support
+    (push 'company-irony company-backends-c-mode-common)))
 
 (defun c-c++/init-company-c-headers ()
   (use-package company-c-headers
@@ -188,3 +190,33 @@
     :post-init
     (dolist (mode c-c++-modes)
       (spacemacs/setup-helm-cscope mode))))
+
+(defun c-c++/init-irony ()
+  (use-package irony
+    :if c-c++-enable-irony-support
+    :defer t))
+
+(defun c-c++/post-init-irony ()
+  (spacemacs/add-to-hooks 'irony-mode '(c-mode-hook c++-mode-hook))
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+(defun c-c++/init-company-irony ()
+  (use-package company-irony
+    :if (configuration-layer/package-usedp 'company)
+    :defer t
+    :init (push 'company-irony company-backends-c-mode-common)
+    ))
+
+(defun c-c++/init-company-irony-c-headers ()
+  (use-package company-irony-c-headers
+    :if (configuration-layer/package-usedp 'company)
+    :defer t
+    :init (push 'company-irony-c-headers company-backends-c-mode-common)
+    ))
+
+(defun c-c++/init-flycheck-irony ()
+  (use-package flycheck-irony
+    :defer t))
+
+(defun c-c++/post-init-flycheck-irony ()
+  (flycheck-irony-setup))
