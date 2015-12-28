@@ -13,6 +13,7 @@
     - [[#clang-format][clang-format]]
     - [[#company-clang-and-flycheck][Company-clang and flycheck]]
   - [[#cmake-configuration][CMake configuration]]
+  - [[#enable-irony-mode][Enable irony-mode]]
 - [[#key-bindings][Key Bindings]]
   - [[#debugger-realgud][Debugger (realgud)]]
 
@@ -38,6 +39,9 @@ scripts.
 - Support for CMake configure/build (with limited support for other build systems),
   automatic generation of =compile_commands.json= (compile flags), on-the-fly configuration
   of flycheck, company-clang and RTags (if installed) with [[https://github.com/atilaneves/cmake-ide][cmake-ide]] .
+- Support for using [[https://github.com/Sarcasm/irony-mode][irony-mode]] for both completion (=company-irony=, when
+  =auto-completion= layer is included) and on-the-fly checking
+  (=flycheck-irony=) when =c-c++-enable-irony-support= is turned on.
 
 * Install
 ** Layer
@@ -126,6 +130,17 @@ build your project with ~SPC c c~ key binding.
        (helm-make-build-dir . "build")
        (helm-make-arguments . "-j7"))))
 #+END_SRC
+
+** Enable irony-mode
+To enable =irony-mode= set the layer variable =c-c++=enable-irony-support= to
+=t= in the dotfile:
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default dotspacemacs-configuration-layers
+    '((c-c++ :variables c-c++-enable-irony-support t)))
+#+END_SRC
+
+On first use build the irony server by executing =irony-install-server=.
 
 * Key Bindings
 
