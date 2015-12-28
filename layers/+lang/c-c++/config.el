@@ -29,3 +29,6 @@
 
 (defvar c-c++-default-mode-for-headers 'c-mode
   "Default mode to open header files. Can be `c-mode' or `c++-mode'.")
+
+(defvar c-c++-enable-irony-support nil
+  "If non-nil irony related packages and configuration are enabled.")
