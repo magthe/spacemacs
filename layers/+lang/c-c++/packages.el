@@ -30,6 +30,10 @@
     stickyfunc-enhance
     ycmd
     xcscope
+    irony
+    company-irony
+    company-irony-c-headers
+    flycheck-irony
     ))
 
 (defun c-c++/init-cc-mode ()
