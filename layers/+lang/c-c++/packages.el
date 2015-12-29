@@ -67,7 +67,7 @@
 
 (defun c-c++/init-clang-format ()
   (use-package clang-format
-    :if c-c++-enable-clang-support
+    :if (or c-c++-enable-clang-support c-c++-enable-irony-support)
     :init
     (when c-c++-enable-clang-format-on-save
       (spacemacs/add-to-hooks 'spacemacs/clang-format-on-save c-c++-mode-hooks))))
