@@ -243,4 +243,4 @@
     :init (spacemacs/set-leader-keys "pl" 'spacemacs/ivy-persp-switch-project)
     :config (ivy-set-actions
              'spacemacs/ivy-persp-switch-project
-             '(("" spacemacs/ivy-switch-project-open-dired "dired")))))
+             '(("d" spacemacs/ivy-switch-project-open-dired "dired")))))
